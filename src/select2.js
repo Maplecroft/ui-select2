@@ -14,6 +14,7 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
     require: 'ngModel',
     priority: 1,
     compile: function (tElm, tAttrs) {
+      tElm.css({"visibility": "hidden"});
       var watch,
         repeatOption,
         repeatAttr,
@@ -213,7 +214,8 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
         // Initialize the plugin late so that the injected DOM does not disrupt the template compiler
         $timeout(function () {
           elm.select2(opts);
-
+          // Set element to visible.
+          elm.prev().css({"visibility": "visible"});
           // Set initial value - I'm not sure about this but it seems to need to be there
           elm.select2('data', controller.$modelValue);
           // important!
